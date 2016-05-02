@@ -1,17 +1,25 @@
+# Defaults
+DEVICE=angler
+ANDROID_VERSION=marshmallow
+FORCE_DOWN=--forcedown
+
 # Make all (Release, Release without rootfs, Kernel ony, Uninstaller)
-all: clean release release-no-rootfs kernel uninstaller
+all:
+	make clean
+	make DEVICE=angler release release-no-rootfs kernel uninstaller
+	make DEVICE=bullhead release release-no-rootfs kernel uninstaller
 
 # Release
 release:
-	python build.py --device angler --marshmallow --rootfs full --release v3.0
+	python build.py --device $(DEVICE) --$(ANDROID_VERSION) --rootfs full $(FORCE_DOWN) --release v3.0
 
 # Release without rootfs
 release-no-rootfs:
-	python build.py --device angler --marshmallow --release v3.0
+	python build.py --device $(DEVICE) --$(ANDROID_VERSION) $(FORCE_DOWN) --release v3.0
 
 # Kernel only
 kernel:
-	python build.py --device angler --marshmallow --kernel
+	python build.py --device $(DEVICE) --$(ANDROID_VERSION) --kernel $(FORCE_DOWN)
 
 # Uninstaller
 uninstaller:
@@ -19,4 +27,4 @@ uninstaller:
 
 # Cleaner
 clean:
-	rm -f kernel-nethunter-angler-*.zip nethunter-angler-*.zip uninstaller-nethunter-*.zip update-nethunter-angler-*.zip
+	rm -f kernel-nethunter-*.zip nethunter-*.zip uninstaller-nethunter-*.zip update-nethunter-*.zip
