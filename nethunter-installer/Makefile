@@ -1,7 +1,7 @@
 # Defaults
 DEVICE=angler
 ANDROID_VERSION=marshmallow
-FORCE_DOWN=--forcedown
+FORCE_DOWN=
 
 # Make all (Release, Release without rootfs, Kernel ony, Uninstaller)
 all:
